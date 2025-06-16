@@ -25,4 +25,4 @@ A modern game aggregation website that embeds various online games through ifram
 - Fullscreen playback
 - Related game recommendations
 
-## 📁 Project Structure 
+
