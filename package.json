@@ -1,0 +1,29 @@
+{
+  "name": "gamehub-aggregator",
+  "version": "1.0.0",
+  "description": "Free Online Games Aggregation Platform",
+  "main": "index.html",
+  "scripts": {
+    "generate": "python game_generator.py",
+    "serve": "python -m http.server 8000",
+    "build": "python game_generator.py && echo 'Build completed!'"
+  },
+  "keywords": [
+    "games",
+    "html5",
+    "iframe",
+    "online-games",
+    "gaming-platform",
+    "free-games",
+    "web-games"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/gamehub-aggregator.git"
+  },
+  "homepage": "https://yourdomain.com",
+  "devDependencies": {},
+  "dependencies": {}
+} 

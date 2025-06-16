@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub - Free Online Games Platform</title>
+    <meta name="description" content="GameHub offers various free online games including action, racing, shooting, puzzle games and more. Support PC and mobile devices.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .game-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        .category-filter {
+            transition: all 0.3s ease;
+        }
+        .category-filter.active {
+            background-color: #3B82F6;
+            color: white;
+        }
+        .search-bar {
+            transition: box-shadow 0.3s ease;
+        }
+        .search-bar:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-gamepad text-3xl text-blue-600"></i>
+                    <h1 class="text-2xl font-bold text-gray-800">GameHub</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition">Popular Games</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition">New Games</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition">Categories</a>
+                </div>
+                <button class="md:hidden text-gray-600" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden pb-4">
+                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition">Home</a>
+                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition">Popular Games</a>
+                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition">New Games</a>
+                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition">Categories</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Search and Filter Area -->
+        <div class="mb-8">
+            <div class="flex flex-col md:flex-row gap-4 mb-6">
+                <div class="flex-1">
+                    <input type="text" id="searchInput" placeholder="Search games..." 
+                           class="search-bar w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <button onclick="searchGames()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                    <i class="fas fa-search mr-2"></i>Search
+                </button>
+            </div>
+            
+            <!-- Category Filter -->
+            <div class="flex flex-wrap gap-2">
+                <button onclick="filterByCategory('all')" class="category-filter active bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    All
+                </button>
+                <button onclick="filterByCategory('action')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Action
+                </button>
+                <button onclick="filterByCategory('racing')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Racing
+                </button>
+                <button onclick="filterByCategory('shooting')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Shooting
+                </button>
+                <button onclick="filterByCategory('puzzle')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Puzzle
+                </button>
+                <button onclick="filterByCategory('arcade')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Arcade
+                </button>
+                <button onclick="filterByCategory('sports')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Sports
+                </button>
+                <button onclick="filterByCategory('adventure')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Adventure
+                </button>
+            </div>
+        </div>
+
+        <!-- Games Grid -->
+        <div id="gamesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Game cards will be generated dynamically via JavaScript -->
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-8">
+            <button id="loadMoreBtn" onclick="loadMoreGames()" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition">
+                <i class="fas fa-plus mr-2"></i>Load More Games
+            </button>
+        </div>
+    </main>
+
+    <!-- Game Details Modal -->
+    <div id="gameModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modalGameTitle" class="text-2xl font-bold text-gray-800"></h3>
+                    <button onclick="closeGameModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="modalGameContent">
+                    <!-- Game iframe and details content will be generated here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/games-data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
