@@ -38,10 +38,13 @@ function createGameCard(game) {
     card.onclick = () => openGameModal(game);
 
     card.innerHTML = `
-        <div class="aspect-w-16 aspect-h-9">
+        <div class="aspect-w-16 aspect-h-9 relative">
             <img src="${game.thumbnail}" alt="${game.title}" 
                  class="w-full h-48 object-cover" 
-                 onerror="this.src='data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><rect width=\"400\" height=\"300\" fill=\"%23f3f4f6\"/><text x=\"200\" y=\"150\" text-anchor=\"middle\" fill=\"%236b7280\" font-size=\"16\">${game.title}</text></svg>'">
+                 onerror="this.src='https://via.placeholder.com/400x300/f3f4f6/6b7280?text=${encodeURIComponent(game.title)}'">
+            <div class="absolute top-2 right-2">
+                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Free</span>
+            </div>
         </div>
         <div class="p-4">
             <h3 class="font-bold text-lg text-gray-800 mb-2">${game.title}</h3>
@@ -230,7 +233,7 @@ function toggleMobileMenu() {
 
 // Open game page
 function openGamePage(filename) {
-    window.open(filename, '_blank');
+    window.open(`games/${filename}`, '_blank');
 }
 
 // Share game
@@ -272,4 +275,70 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize page
     initializePage();
-}); 
+    
+    // Update statistics
+    updateStatistics();
+});
+
+// Update platform statistics
+function updateStatistics() {
+    const totalGamesElement = document.getElementById('totalGames');
+    if (totalGamesElement) {
+        totalGamesElement.textContent = gamesDatabase.length + '+';
+    }
+}
+
+// Navigation functions
+function showAllGames() {
+    currentFilter = 'all';
+    currentPage = 1;
+    currentGames = [...gamesDatabase];
+    
+    // Update button state
+    document.querySelectorAll('.category-filter').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector('.category-filter').classList.add('active');
+    
+    // Clear search
+    document.getElementById('searchInput').value = '';
+    
+    displayGames();
+    document.title = 'GameHub - Free Online Games Platform';
+}
+
+function showPopularGames() {
+    currentFilter = 'popular';
+    currentPage = 1;
+    currentGames = [...gamesDatabase].sort((a, b) => b.plays - a.plays);
+    
+    // Update button state
+    document.querySelectorAll('.category-filter').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    displayGames();
+    document.title = 'Popular Games - GameHub';
+}
+
+function showNewGames() {
+    currentFilter = 'new';
+    currentPage = 1;
+    // Sort by ID (assuming higher ID = newer)
+    currentGames = [...gamesDatabase].sort((a, b) => b.id - a.id);
+    
+    // Update button state
+    document.querySelectorAll('.category-filter').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    displayGames();
+    document.title = 'New Games - GameHub';
+}
+
+function showCategoriesModal() {
+    // Show all categories
+    const categories = ['all', 'action', 'racing', 'shooting', 'puzzle', 'arcade', 'sports', 'adventure'];
+    const categoryButtons = document.querySelectorAll('.category-filter');
+    categoryButtons[0].scrollIntoView({ behavior: 'smooth' });
+} 

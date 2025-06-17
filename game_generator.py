@@ -148,6 +148,65 @@ class GamePageGenerator:
                 </ul>
                 """,
                 "filename": "masked-forces.html"
+            },
+            # Additional popular games
+            {
+                "id": 16,
+                "title": "Among Us",
+                "description": "Social deduction game where crewmates must find the impostor among them. Work together to complete tasks while identifying the hidden impostor.",
+                "category": "Arcade",
+                "category_en": "arcade",
+                "embed_url": "https://poki.com/en/g/among-us",
+                "tags": ["Arcade", "Social", "Mystery", "Multiplayer"],
+                "rating": 4.8,
+                "plays": 89000,
+                "instructions": """
+                <h4 class="font-semibold mb-2">Game Controls:</h4>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>WASD or Arrow keys to move</li>
+                    <li>Mouse to interact with tasks</li>
+                    <li>Space or click to use/interact</li>
+                    <li>R key to report dead bodies</li>
+                    <li>Tab to access map</li>
+                </ul>
+                <h4 class="font-semibold mt-4 mb-2">Gameplay Tips:</h4>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>Complete tasks quickly to help crewmates</li>
+                    <li>Watch other players' behavior carefully</li>
+                    <li>Report suspicious activities immediately</li>
+                    <li>Use emergency meetings wisely</li>
+                </ul>
+                """,
+                "filename": "among-us.html"
+            },
+            {
+                "id": 17,
+                "title": "Subway Surfers",
+                "description": "Endless running game. Run as far as you can in this colorful adventure while avoiding trains and collecting coins.",
+                "category": "Arcade",
+                "category_en": "arcade",
+                "embed_url": "https://poki.com/en/g/subway-surfers",
+                "tags": ["Arcade", "Running", "Endless", "Adventure"],
+                "rating": 4.7,
+                "plays": 156000,
+                "instructions": """
+                <h4 class="font-semibold mb-2">Game Controls:</h4>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>Arrow keys or WASD to move</li>
+                    <li>Up arrow to jump</li>
+                    <li>Down arrow to slide</li>
+                    <li>Left/Right arrows to switch lanes</li>
+                    <li>Space bar for hoverboard</li>
+                </ul>
+                <h4 class="font-semibold mt-4 mb-2">Game Tips:</h4>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>Collect coins to unlock characters</li>
+                    <li>Use power-ups strategically</li>
+                    <li>Watch for trains and obstacles</li>
+                    <li>Complete daily challenges for rewards</li>
+                </ul>
+                """,
+                "filename": "subway-surfers.html"
             }
         ]
 

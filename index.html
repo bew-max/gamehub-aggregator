@@ -40,10 +40,10 @@
                     <h1 class="text-2xl font-bold text-gray-800">GameHub</h1>
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="#" class="text-gray-600 hover:text-blue-600 transition">Home</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-600 transition">Popular Games</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-600 transition">New Games</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-600 transition">Categories</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition" onclick="showAllGames()">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition" onclick="showPopularGames()">Popular Games</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition" onclick="showNewGames()">New Games</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition" onclick="showCategoriesModal()">Categories</a>
                 </div>
                 <button class="md:hidden text-gray-600" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars text-xl"></i>
@@ -51,10 +51,10 @@
             </div>
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="md:hidden hidden pb-4">
-                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition">Home</a>
-                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition">Popular Games</a>
-                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition">New Games</a>
-                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition">Categories</a>
+                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition" onclick="showAllGames(); toggleMobileMenu()">Home</a>
+                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition" onclick="showPopularGames(); toggleMobileMenu()">Popular Games</a>
+                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition" onclick="showNewGames(); toggleMobileMenu()">New Games</a>
+                <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition" onclick="showCategoriesModal(); toggleMobileMenu()">Categories</a>
             </div>
         </div>
     </nav>
@@ -130,7 +130,93 @@
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Statistics Section -->
+        <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Platform Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-gamepad text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800" id="totalGames">25+</h3>
+                    <p class="text-gray-600">Total Games</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-users text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">500K+</h3>
+                    <p class="text-gray-600">Players</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-star text-2xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">4.5/5</h3>
+                    <p class="text-gray-600">Average Rating</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-download text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Free</h3>
+                    <p class="text-gray-600">No Download</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-gamepad text-2xl text-blue-400"></i>
+                        <h3 class="text-xl font-bold">GameHub</h3>
+                    </div>
+                    <p class="text-gray-400">Your ultimate destination for free online games. Play instantly without downloads!</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Game Categories</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" onclick="filterByCategory('action')" class="hover:text-white transition">Action Games</a></li>
+                        <li><a href="#" onclick="filterByCategory('racing')" class="hover:text-white transition">Racing Games</a></li>
+                        <li><a href="#" onclick="filterByCategory('puzzle')" class="hover:text-white transition">Puzzle Games</a></li>
+                        <li><a href="#" onclick="filterByCategory('arcade')" class="hover:text-white transition">Arcade Games</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" onclick="showPopularGames()" class="hover:text-white transition">Popular Games</a></li>
+                        <li><a href="#" onclick="showNewGames()" class="hover:text-white transition">New Games</a></li>
+                        <li><a href="#" onclick="showAllGames()" class="hover:text-white transition">All Games</a></li>
+                        <li><a href="sitemap.xml" class="hover:text-white transition">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 mt-4 text-sm">© 2025 GameHub. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="js/games-data.js"></script>
     <script src="js/main.js"></script>
