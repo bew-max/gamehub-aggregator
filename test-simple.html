@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub 简单测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .game-card { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .error { color: red; }
+        .success { color: green; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>GameHub 功能测试</h1>
+    
+    <div id="status">正在检测...</div>
+    
+    <h2>导航测试</h2>
+    <button onclick="showAllGames()">显示所有游戏</button>
+    <button onclick="showPopularGames()">热门游戏</button>
+    <button onclick="showNewGames()">新游戏</button>
+    
+    <h2>游戏列表</h2>
+    <div id="gamesList"></div>
+    
+    <h2>调试信息</h2>
+    <div id="debugInfo"></div>
+
+    <script src="js/games-data.js"></script>
+    <script>
+        const statusDiv = document.getElementById('status');
+        const gamesListDiv = document.getElementById('gamesList');
+        const debugDiv = document.getElementById('debugInfo');
+        
+        function log(message, type = 'info') {
+            const p = document.createElement('p');
+            p.className = type;
+            p.textContent = new Date().toLocaleTimeString() + ': ' + message;
+            debugDiv.appendChild(p);
+            console.log(message);
+        }
+        
+        // 检查游戏数据
+        if (typeof gamesDatabase !== 'undefined') {
+            statusDiv.innerHTML = '<span class="success">✅ 游戏数据加载成功！共有 ' + gamesDatabase.length + ' 个游戏</span>';
+            log('游戏数据库加载成功，包含 ' + gamesDatabase.length + ' 个游戏', 'success');
+            
+            // 显示前5个游戏
+            gamesDatabase.slice(0, 5).forEach(game => {
+                const div = document.createElement('div');
+                div.className = 'game-card';
+                div.innerHTML = `
+                    <h3>${game.title}</h3>
+                    <p>分类: ${game.category}</p>
+                    <p>评分: ${game.rating}</p>
+                    <p>游玩次数: ${game.plays}</p>
+                `;
+                gamesListDiv.appendChild(div);
+            });
+            
+        } else {
+            statusDiv.innerHTML = '<span class="error">❌ 游戏数据加载失败</span>';
+            log('游戏数据库加载失败', 'error');
+        }
+        
+        // 测试函数
+        let currentGames = [];
+        
+        function showAllGames() {
+            log('调用 showAllGames 函数', 'info');
+            if (typeof gamesDatabase !== 'undefined') {
+                currentGames = [...gamesDatabase];
+                log('显示所有游戏：' + currentGames.length + ' 个', 'success');
+            } else {
+                log('无法显示游戏：数据库未加载', 'error');
+            }
+        }
+        
+        function showPopularGames() {
+            log('调用 showPopularGames 函数', 'info');
+            if (typeof gamesDatabase !== 'undefined') {
+                currentGames = [...gamesDatabase].sort((a, b) => b.plays - a.plays);
+                log('按热度排序，最热门的游戏：' + currentGames[0].title, 'success');
+            } else {
+                log('无法显示热门游戏：数据库未加载', 'error');
+            }
+        }
+        
+        function showNewGames() {
+            log('调用 showNewGames 函数', 'info');
+            if (typeof gamesDatabase !== 'undefined') {
+                currentGames = [...gamesDatabase].sort((a, b) => b.id - a.id);
+                log('按ID排序，最新的游戏：' + currentGames[0].title, 'success');
+            } else {
+                log('无法显示新游戏：数据库未加载', 'error');
+            }
+        }
+        
+        log('页面加载完成');
+    </script>
+</body>
+</html> 

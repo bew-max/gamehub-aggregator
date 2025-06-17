@@ -1,1 +1,372 @@
- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub Debug - Free Online Games Platform</title>
+    <meta name="description" content="GameHub offers various free online games including action, racing, shooting, puzzle games and more.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .game-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        .category-filter {
+            transition: all 0.3s ease;
+        }
+        .category-filter.active {
+            background-color: #3B82F6;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 调试信息 -->
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4">
+        <p class="font-bold">🐛 调试模式 - 测试修复版本</p>
+        <p>如果您能看到游戏卡片，说明修复成功。控制台应该显示调试信息。</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-gamepad text-3xl text-blue-600"></i>
+                    <h1 class="text-2xl font-bold text-gray-800">GameHub (Debug)</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="javascript:void(0)" class="text-gray-600 hover:text-blue-600 transition" onclick="showAllGames()">Home</a>
+                    <a href="javascript:void(0)" class="text-gray-600 hover:text-blue-600 transition" onclick="showPopularGames()">Popular Games</a>
+                    <a href="javascript:void(0)" class="text-gray-600 hover:text-blue-600 transition" onclick="showNewGames()">New Games</a>
+                    <a href="javascript:void(0)" class="text-gray-600 hover:text-blue-600 transition" onclick="showCategoriesModal()">Categories</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- 调试信息区域 -->
+        <div id="debugInfo" class="bg-blue-50 p-4 rounded-lg mb-6">
+            <h3 class="font-bold text-blue-800 mb-2">调试信息:</h3>
+            <div id="debugMessages" class="text-sm text-blue-700">
+                <p>正在加载...</p>
+            </div>
+        </div>
+
+        <!-- Search and Filter Area -->
+        <div class="mb-8">
+            <div class="flex flex-col md:flex-row gap-4 mb-6">
+                <div class="flex-1">
+                    <input type="text" id="searchInput" placeholder="Search games..." 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <button onclick="searchGames()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                    <i class="fas fa-search mr-2"></i>Search
+                </button>
+            </div>
+            
+            <!-- Category Filter -->
+            <div class="flex flex-wrap gap-2">
+                <button onclick="filterByCategory('all')" class="category-filter active bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    All
+                </button>
+                <button onclick="filterByCategory('action')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Action
+                </button>
+                <button onclick="filterByCategory('racing')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Racing
+                </button>
+                <button onclick="filterByCategory('puzzle')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Puzzle
+                </button>
+                <button onclick="filterByCategory('arcade')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                    Arcade
+                </button>
+            </div>
+        </div>
+
+        <!-- Games Grid -->
+        <div id="gamesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Game cards will be generated dynamically via JavaScript -->
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-8">
+            <button id="loadMoreBtn" onclick="loadMoreGames()" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition">
+                <i class="fas fa-plus mr-2"></i>Load More Games
+            </button>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Platform Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-gamepad text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800" id="totalGames">0</h3>
+                    <p class="text-gray-600">Total Games</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-users text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">500K+</h3>
+                    <p class="text-gray-600">Players</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-star text-2xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">4.5/5</h3>
+                    <p class="text-gray-600">Average Rating</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-download text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Free</h3>
+                    <p class="text-gray-600">No Download</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Game Details Modal -->
+    <div id="gameModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modalGameTitle" class="text-2xl font-bold text-gray-800"></h3>
+                    <button onclick="closeGameModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="modalGameContent">
+                    <!-- Game iframe and details content will be generated here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 首先加载游戏数据 -->
+    <script src="js/games-data.js"></script>
+    
+    <!-- 调试脚本 -->
+    <script>
+        // 调试函数
+        function addDebugMessage(message) {
+            const debugMessages = document.getElementById('debugMessages');
+            if (debugMessages) {
+                debugMessages.innerHTML += '<p>' + new Date().toLocaleTimeString() + ': ' + message + '</p>';
+            }
+            console.log('Debug:', message);
+        }
+
+        // 检查游戏数据是否加载
+        if (typeof gamesDatabase !== 'undefined') {
+            addDebugMessage('✅ 游戏数据库加载成功，包含 ' + gamesDatabase.length + ' 个游戏');
+        } else {
+            addDebugMessage('❌ 游戏数据库加载失败');
+        }
+
+        // 简化的主要功能
+        let currentGames = [];
+        let currentFilter = 'all';
+        let gamesPerPage = 8;
+        let currentPage = 1;
+
+        // 初始化页面
+        function initializePage() {
+            addDebugMessage('开始初始化页面...');
+            if (typeof gamesDatabase !== 'undefined') {
+                currentGames = [...gamesDatabase];
+                displayGames();
+                updateStatistics();
+                addDebugMessage('✅ 页面初始化完成');
+            } else {
+                addDebugMessage('❌ 初始化失败：游戏数据库未加载');
+            }
+        }
+
+        // 显示游戏
+        function displayGames() {
+            const gamesGrid = document.getElementById('gamesGrid');
+            if (!gamesGrid) {
+                addDebugMessage('❌ 找不到游戏网格元素');
+                return;
+            }
+
+            const startIndex = 0;
+            const endIndex = currentPage * gamesPerPage;
+            const gamesToShow = currentGames.slice(startIndex, endIndex);
+
+            gamesGrid.innerHTML = '';
+
+            gamesToShow.forEach(game => {
+                const gameCard = createGameCard(game);
+                gamesGrid.appendChild(gameCard);
+            });
+
+            addDebugMessage('✅ 显示了 ' + gamesToShow.length + ' 个游戏');
+
+            // 更新加载更多按钮
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (loadMoreBtn) {
+                if (endIndex >= currentGames.length) {
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    loadMoreBtn.style.display = 'block';
+                }
+            }
+        }
+
+        // 创建游戏卡片
+        function createGameCard(game) {
+            const card = document.createElement('div');
+            card.className = 'game-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer';
+            
+            card.innerHTML = `
+                <div class="relative">
+                    <img src="${game.thumbnail}" alt="${game.title}" 
+                         class="w-full h-48 object-cover" 
+                         onerror="this.src='https://via.placeholder.com/400x300/6366f1/ffffff?text=${encodeURIComponent(game.title)}'">
+                    <div class="absolute top-2 right-2">
+                        <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Free</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">${game.title}</h3>
+                    <p class="text-gray-600 text-sm mb-3">${game.description.substring(0, 100)}...</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-1">
+                            <span class="text-yellow-500">⭐</span>
+                            <span class="text-xs text-gray-500">${game.rating}</span>
+                        </div>
+                        <span class="text-xs text-gray-500">
+                            <i class="fas fa-play mr-1"></i>${formatNumber(game.plays)}
+                        </span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">${game.category}</span>
+                    </div>
+                </div>
+            `;
+
+            card.onclick = () => {
+                addDebugMessage('点击了游戏: ' + game.title);
+                // 可以在这里添加模态框显示逻辑
+            };
+
+            return card;
+        }
+
+        // 格式化数字
+        function formatNumber(num) {
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+
+        // 导航函数
+        function showAllGames() {
+            addDebugMessage('显示所有游戏');
+            currentFilter = 'all';
+            currentPage = 1;
+            if (typeof gamesDatabase !== 'undefined') {
+                currentGames = [...gamesDatabase];
+                displayGames();
+            }
+        }
+
+        function showPopularGames() {
+            addDebugMessage('显示热门游戏');
+            currentFilter = 'popular';
+            currentPage = 1;
+            if (typeof gamesDatabase !== 'undefined') {
+                currentGames = [...gamesDatabase].sort((a, b) => b.plays - a.plays);
+                displayGames();
+            }
+        }
+
+        function showNewGames() {
+            addDebugMessage('显示新游戏');
+            currentFilter = 'new';
+            currentPage = 1;
+            if (typeof gamesDatabase !== 'undefined') {
+                currentGames = [...gamesDatabase].sort((a, b) => b.id - a.id);
+                displayGames();
+            }
+        }
+
+        function showCategoriesModal() {
+            addDebugMessage('显示分类');
+            // 滚动到分类区域
+            const categoryButtons = document.querySelectorAll('.category-filter');
+            if (categoryButtons.length > 0) {
+                categoryButtons[0].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function filterByCategory(category) {
+            addDebugMessage('筛选分类: ' + category);
+            currentFilter = category;
+            currentPage = 1;
+
+            if (typeof gamesDatabase !== 'undefined') {
+                if (category === 'all') {
+                    currentGames = [...gamesDatabase];
+                } else {
+                    currentGames = gamesDatabase.filter(game => game.category === category);
+                }
+                displayGames();
+            }
+        }
+
+        function searchGames() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                const searchTerm = searchInput.value.toLowerCase();
+                addDebugMessage('搜索: ' + searchTerm);
+                // 可以添加搜索逻辑
+            }
+        }
+
+        function loadMoreGames() {
+            currentPage++;
+            displayGames();
+        }
+
+        function closeGameModal() {
+            // 关闭模态框逻辑
+        }
+
+        // 更新统计
+        function updateStatistics() {
+            const totalGamesElement = document.getElementById('totalGames');
+            if (totalGamesElement && typeof gamesDatabase !== 'undefined') {
+                totalGamesElement.textContent = gamesDatabase.length + '+';
+                addDebugMessage('✅ 统计更新完成');
+            }
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            addDebugMessage('DOM加载完成，开始初始化...');
+            setTimeout(() => {
+                initializePage();
+            }, 100);
+        });
+
+        addDebugMessage('调试脚本加载完成');
+    </script>
+</body>
+</html> 
