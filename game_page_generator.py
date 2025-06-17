@@ -202,6 +202,16 @@ class GamePageGenerator:
     <meta property="og:image" content="{thumbnail}">
     <meta name="twitter:card" content="summary_large_image">
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-01N6YGH1B6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+
+      gtag('config', 'G-01N6YGH1B6');
+    </script>
+    
     <script type="application/ld+json">
     {{
         "@context": "https://schema.org",
