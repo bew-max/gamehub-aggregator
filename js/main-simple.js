@@ -52,13 +52,18 @@ function displayGames() {
 function createGameCard(game) {
     const card = document.createElement('div');
     card.className = 'game-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer';
-    card.onclick = () => openGameModal(game);
+    card.onclick = (e) => {
+        e.preventDefault();
+        console.log('点击了游戏卡片:', game.title);
+        openGameModal(game);
+    };
 
     card.innerHTML = `
         <div class="aspect-w-16 aspect-h-9 relative">
-            <img src="${game.thumbnail}" alt="${game.title}" 
-                 class="w-full h-48 object-cover" 
-                 onerror="this.src='https://via.placeholder.com/400x300/f3f4f6/6b7280?text=${encodeURIComponent(game.title)}'">
+            <img src="${game.thumbnail}" 
+                 alt="${game.title}" 
+                 class="w-full h-48 object-cover"
+                 onerror="this.src='${getGameImage(game)}'">
             <div class="absolute top-2 right-2">
                 <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Free</span>
             </div>
@@ -108,13 +113,29 @@ function generateStars(rating) {
     return starsHtml;
 }
 
-// 格式化数字
-function formatNumber(num) {
-    if (num >= 1000) {
-        return (num / 1000).toFixed(1) + 'K';
-    }
-    return num.toString();
-}
+        // 格式化数字
+        function formatNumber(num) {
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+
+        // 获取游戏的占位符图片
+        function getGameImage(game) {
+            const colors = {
+                'action': '991B1B/ffffff',      // 红色
+                'racing': '059669/ffffff',      // 绿色  
+                'shooting': '7C3AED/ffffff',    // 紫色
+                'puzzle': '0891B2/ffffff',      // 蓝绿色
+                'arcade': 'F59E0B/ffffff',      // 黄色
+                'sports': 'EA580C/ffffff',      // 橙色
+                'adventure': '16A34A/ffffff'    // 深绿色
+            };
+            
+            const color = colors[game.category] || '6366f1/ffffff'; // 默认蓝色
+            return `https://via.placeholder.com/400x300/${color}?text=${encodeURIComponent(game.title)}`;
+        }
 
 // 打开游戏模态框
 function openGameModal(game) {
@@ -156,7 +177,7 @@ function openGameModal(game) {
                     </div>
                 </div>
                 <div class="mt-4 flex gap-2">
-                    <button onclick="openGamePage('${game.filename}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                    <button onclick="openGamePage('${game.filename}'); closeGameModal();" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                         <i class="fas fa-external-link-alt mr-2"></i>Open Game Page
                     </button>
                     <button onclick="shareGame('${game.title}', '${game.description}')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
@@ -173,6 +194,7 @@ function openGameModal(game) {
 
 // 关闭游戏模态框
 function closeGameModal() {
+    console.log('关闭模态框');
     const modal = document.getElementById('gameModal');
     if (modal) {
         modal.classList.add('hidden');
@@ -331,7 +353,9 @@ function toggleMobileMenu() {
 
 // 打开游戏页面
 function openGamePage(filename) {
-    window.open(`games/${filename}`, '_blank');
+    console.log('打开游戏页面:', filename);
+    const gameUrl = `games/${filename}`;
+    window.open(gameUrl, '_blank');
 }
 
 // 分享游戏

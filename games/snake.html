@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game - Play Free Online | GameHub</title>
+    <meta name="description" content="Classic snake game. Control the snake to eat food and grow longer without hitting walls or yourself. Play Snake Game online for free. No downloads required!">
+    <meta name="keywords" content="snake game, classic arcade, retro games, online snake, browser games">
+    <meta name="author" content="GameHub">
+    <meta property="og:title" content="Snake Game - Free Online Game">
+    <meta property="og:description" content="Classic snake game. Control the snake to eat food and grow longer without hitting walls or yourself.">
+    <meta property="og:type" content="game">
+    <meta property="og:url" content="https://gamehub.help/games/snake.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1553481187-be93c21490a9?w=400&h=300&fit=crop&auto=format">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Snake Game",
+        "description": "The Snake game is a classic arcade game where the player maneuvers a line which grows in length, with the line itself being a primary obstacle.",
+        "genre": "arcade",
+        "url": "https://gamehub.help/games/snake.html",
+        "image": "https://images.unsplash.com/photo-1553481187-be93c21490a9?w=400&h=300&fit=crop&auto=format",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.3",
+            "ratingCount": "67000"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .game-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            .game-frame {
+                height: 450px;
+            }
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 hero-gradient rounded-xl flex items-center justify-center">
+                        <i class="fas fa-gamepad text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <a href="../index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">GameHub</a>
+                        <p class="text-xs text-gray-500">Free Online Games</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="../index.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-home mr-2"></i>All Games
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <section class="hero-gradient text-white py-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Snake Game</h1>
+                <p class="text-xl mb-6 opacity-90">Classic snake game. Control the snake to eat food and grow longer without hitting walls or yourself.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm">
+                        <i class="fas fa-star mr-2"></i>Rating: 4.3/5
+                    </span>
+                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm">
+                        <i class="fas fa-play mr-2"></i>67,000 plays
+                    </span>
+                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm">
+                        <i class="fas fa-tag mr-2"></i>Arcade
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Game Player -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+            <div class="bg-gray-800 text-white p-4">
+                <h2 class="text-xl font-bold">
+                    <i class="fas fa-gamepad mr-2"></i>Play Snake Game Online - Free & Instant
+                </h2>
+            </div>
+            <div class="p-6">
+                <div class="bg-gray-100 rounded-lg p-4 mb-6">
+                    <iframe src="https://playsnake.org/" 
+                            class="game-frame"
+                            allowfullscreen
+                            title="Snake Game Game"
+                            loading="lazy">
+                        <p>Your browser does not support iframes. Please <a href="https://playsnake.org/" target="_blank">click here to play Snake Game</a>.</p>
+                    </iframe>
+                </div>
+                
+                <!-- Game Controls & Tips -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">
+                            <i class="fas fa-keyboard mr-2"></i>Game Controls
+                        </h3>
+                        <ul class="text-blue-700 space-y-2">
+                            <li>• Arrow Keys: Control snake direction</li>
+<li>• WASD: Alternative controls</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-green-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-green-800 mb-3">
+                            <i class="fas fa-lightbulb mr-2"></i>Tips & Strategy
+                        </h3>
+                        <ul class="text-green-700 space-y-2">
+                            <li>• Plan your path carefully</li>
+<li>• Use the edges to your advantage</li>
+<li>• Don't get trapped by your own tail</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Information -->
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+            <!-- Game Description -->
+            <div class="md:col-span-2 bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">About Snake Game</h2>
+                <div class="text-gray-600 space-y-4">
+                    <p>The Snake game is a classic arcade game where the player maneuvers a line which grows in length, with the line itself being a primary obstacle.</p>
+                    <p><strong>How to Play:</strong> Use arrow keys to control the snake. Eat food to grow longer but don't hit the walls or your tail!</p>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Why Play Snake Game Online?</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span class="text-sm">Completely Free</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span class="text-sm">No Download Required</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span class="text-sm">Mobile Friendly</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span class="text-sm">Instant Access</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Game Stats & Tags -->
+            <div class="space-y-6">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Game Statistics</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Rating:</span>
+                            <span class="font-semibold">4.3/5 ⭐</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Total Plays:</span>
+                            <span class="font-semibold">67,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Category:</span>
+                            <span class="font-semibold">Arcade</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Game Tags</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">snake</span>
+<span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">classic</span>
+<span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">retro</span>
+<span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">simple</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Games -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">More Arcade Games</h2>
+            <div class="text-center">
+                <a href="../index.html#arcade" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition inline-block">
+                    <i class="fas fa-gamepad mr-2"></i>Explore All Arcade Games
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <div class="w-10 h-10 hero-gradient rounded-xl flex items-center justify-center">
+                    <i class="fas fa-gamepad text-white text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold">GameHub</h3>
+            </div>
+            <p class="text-gray-400 mb-4">Your destination for free online games. Play instantly without downloads!</p>
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="../index.html" class="text-gray-400 hover:text-white transition">Home</a>
+                <a href="../index.html#puzzle" class="text-gray-400 hover:text-white transition">Puzzle Games</a>
+                <a href="../index.html#arcade" class="text-gray-400 hover:text-white transition">Arcade Games</a>
+            </div>
+            <p class="text-sm text-gray-500">© 2025 GameHub. All rights reserved. Play Snake Game and more games free online!</p>
+        </div>
+    </footer>
+</body>
+</html>

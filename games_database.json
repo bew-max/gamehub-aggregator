@@ -1,0 +1,192 @@
+[
+  {
+    "id": 1,
+    "title": "2048",
+    "category": "puzzle",
+    "thumbnail": "https://play2048.co/images/logo.png",
+    "url": "https://play2048.co/",
+    "rating": 4.5,
+    "plays": 125000,
+    "description": "经典数字益智游戏，滑动合并数字瓷砖达到2048",
+    "tags": [
+      "数字",
+      "益智",
+      "经典"
+    ],
+    "status": "active",
+    "verified": true,
+    "created_at": "2025-01-01",
+    "updated_at": "2025-01-01"
+  },
+  {
+    "id": 2,
+    "title": "俄罗斯方块",
+    "category": "arcade",
+    "thumbnail": "https://tetris.com/images/tetris-logo.png",
+    "url": "https://tetris.com/play-tetris",
+    "rating": 4.8,
+    "plays": 89000,
+    "description": "经典俄罗斯方块游戏，排列方块消除行",
+    "tags": [
+      "方块",
+      "经典",
+      "街机"
+    ],
+    "status": "active",
+    "verified": true,
+    "created_at": "2025-01-01",
+    "updated_at": "2025-01-01"
+  },
+  {
+    "id": 3,
+    "title": "贪吃蛇",
+    "category": "arcade",
+    "thumbnail": "https://via.placeholder.com/300x200/4CAF50/ffffff?text=Snake",
+    "url": "https://playsnake.org/",
+    "rating": 4.3,
+    "plays": 67000,
+    "description": "经典贪吃蛇游戏，控制蛇吃食物成长",
+    "tags": [
+      "经典",
+      "休闲",
+      "简单"
+    ],
+    "status": "active",
+    "verified": true,
+    "created_at": "2025-01-01",
+    "updated_at": "2025-01-01"
+  },
+  {
+    "id": 4,
+    "title": "吃豆人",
+    "category": "arcade",
+    "thumbnail": "https://via.placeholder.com/300x200/FFD700/000000?text=Pac-Man",
+    "url": "https://www.google.com/doodles/30th-anniversary-of-pac-man",
+    "rating": 4.7,
+    "plays": 156000,
+    "description": "经典吃豆人游戏，避开幽灵收集豆子",
+    "tags": [
+      "经典",
+      "街机",
+      "冒险"
+    ],
+    "status": "active",
+    "verified": true,
+    "created_at": "2025-01-01",
+    "updated_at": "2025-01-01"
+  },
+  {
+    "id": 5,
+    "title": "Flappy Bird",
+    "category": "arcade",
+    "thumbnail": "https://via.placeholder.com/300x200/87CEEB/ffffff?text=Flappy+Bird",
+    "url": "https://flappybird.io/",
+    "rating": 4.2,
+    "plays": 92000,
+    "description": "点击控制小鸟飞行，避开管道障碍",
+    "tags": [
+      "休闲",
+      "简单",
+      "挑战"
+    ],
+    "status": "active",
+    "verified": true,
+    "created_at": "2025-01-01",
+    "updated_at": "2025-01-01"
+  },
+  {
+    "id": 6,
+    "title": "Chrome恐龙",
+    "category": "arcade",
+    "thumbnail": "https://via.placeholder.com/300x200/757575/ffffff?text=Chrome+Dino",
+    "url": "https://chromedino.com/",
+    "rating": 4.4,
+    "plays": 78000,
+    "description": "Chrome浏览器离线恐龙游戏，跳跃避开仙人掌",
+    "tags": [
+      "休闲",
+      "简单",
+      "无尽"
+    ],
+    "status": "active",
+    "verified": true,
+    "created_at": "2025-01-01",
+    "updated_at": "2025-01-01"
+  },
+  {
+    "id": 7,
+    "title": "泡泡射手",
+    "category": "puzzle",
+    "thumbnail": "https://via.placeholder.com/300x200/FF6B6B/ffffff?text=Bubble+Shooter",
+    "url": "https://bubbleshooter.net/",
+    "rating": 4.1,
+    "plays": 43000,
+    "description": "射击相同颜色的泡泡进行消除",
+    "tags": [
+      "泡泡",
+      "射击",
+      "消除"
+    ],
+    "status": "active",
+    "verified": true,
+    "created_at": "2025-01-01",
+    "updated_at": "2025-01-01"
+  },
+  {
+    "id": 8,
+    "title": "纸牌接龙",
+    "category": "puzzle",
+    "thumbnail": "https://via.placeholder.com/300x200/228B22/ffffff?text=Solitaire",
+    "url": "https://solitaired.com/",
+    "rating": 4.6,
+    "plays": 134000,
+    "description": "经典纸牌接龙游戏，整理卡牌到目标位置",
+    "tags": [
+      "纸牌",
+      "策略",
+      "经典"
+    ],
+    "status": "active",
+    "verified": true,
+    "created_at": "2025-01-01",
+    "updated_at": "2025-01-01"
+  },
+  {
+    "id": 9,
+    "title": "国际象棋",
+    "category": "puzzle",
+    "thumbnail": "https://via.placeholder.com/300x200/8B4513/ffffff?text=Chess",
+    "url": "https://lichess.org/",
+    "rating": 4.8,
+    "plays": 98000,
+    "description": "在线国际象棋，与AI或其他玩家对战",
+    "tags": [
+      "象棋",
+      "策略",
+      "智力"
+    ],
+    "status": "active",
+    "verified": true,
+    "created_at": "2025-01-01",
+    "updated_at": "2025-01-01"
+  },
+  {
+    "id": 10,
+    "title": "填字游戏",
+    "category": "puzzle",
+    "thumbnail": "https://via.placeholder.com/300x200/4169E1/ffffff?text=Crossword",
+    "url": "https://www.dailycrosswordpuzzles.com/",
+    "rating": 4.3,
+    "plays": 27000,
+    "description": "每日填字游戏，挑战您的词汇量",
+    "tags": [
+      "文字",
+      "词汇",
+      "智力"
+    ],
+    "status": "active",
+    "verified": true,
+    "created_at": "2025-01-01",
+    "updated_at": "2025-01-01"
+  }
+]
