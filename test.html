@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub Test Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .test-result { padding: 10px; margin: 5px 0; border-radius: 5px; }
+        .pass { background-color: #d4edda; color: #155724; }
+        .fail { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow">
+        <h1 class="text-2xl font-bold mb-4">GameHub功能测试</h1>
+        <div id="test-results"></div>
+        <br>
+        <h2 class="text-xl font-bold mb-4">游戏数据测试</h2>
+        <div id="game-count" class="test-result"></div>
+        <div id="game-list" class="mt-4"></div>
+    </div>
+
+    <script src="js/games-data.js"></script>
+    <script>
+        function runTests() {
+            const results = document.getElementById('test-results');
+            const gameCount = document.getElementById('game-count');
+            const gameList = document.getElementById('game-list');
+            
+            // Test 1: Check if gamesDatabase is loaded
+            if (typeof gamesDatabase !== 'undefined') {
+                results.innerHTML += '<div class="test-result pass">✅ 游戏数据库加载成功</div>';
+                gameCount.innerHTML = `<strong>总游戏数量: ${gamesDatabase.length}</strong>`;
+                gameCount.className = 'test-result pass';
+                
+                // Show game list
+                let gameListHTML = '<h3 class="font-bold">游戏列表:</h3><ul class="list-disc list-inside">';
+                gamesDatabase.slice(0, 10).forEach(game => {
+                    gameListHTML += `<li>${game.title} (${game.category})</li>`;
+                });
+                if (gamesDatabase.length > 10) {
+                    gameListHTML += `<li>... 还有 ${gamesDatabase.length - 10} 个游戏</li>`;
+                }
+                gameListHTML += '</ul>';
+                gameList.innerHTML = gameListHTML;
+                
+            } else {
+                results.innerHTML += '<div class="test-result fail">❌ 游戏数据库加载失败</div>';
+                gameCount.innerHTML = '游戏数据库未加载';
+                gameCount.className = 'test-result fail';
+            }
+            
+            // Test 2: Check specific games
+            if (typeof gamesDatabase !== 'undefined' && gamesDatabase.length > 0) {
+                const amongUs = gamesDatabase.find(game => game.title === 'Among Us');
+                const subway = gamesDatabase.find(game => game.title === 'Subway Surfers');
+                
+                if (amongUs) {
+                    results.innerHTML += '<div class="test-result pass">✅ Among Us 游戏数据存在</div>';
+                } else {
+                    results.innerHTML += '<div class="test-result fail">❌ Among Us 游戏数据缺失</div>';
+                }
+                
+                if (subway) {
+                    results.innerHTML += '<div class="test-result pass">✅ Subway Surfers 游戏数据存在</div>';
+                } else {
+                    results.innerHTML += '<div class="test-result fail">❌ Subway Surfers 游戏数据缺失</div>';
+                }
+            }
+            
+            // Test 3: Check game page files
+            const gameFiles = ['among-us.html', 'subway-surfers.html', 'highway-traffic.html'];
+            results.innerHTML += '<div class="test-result">📁 需要检查的游戏页面文件:</div>';
+            gameFiles.forEach(file => {
+                results.innerHTML += `<div class="test-result">- games/${file}</div>`;
+            });
+        }
+        
+        // Run tests when page loads
+        window.onload = runTests;
+    </script>
+</body>
+</html> 
